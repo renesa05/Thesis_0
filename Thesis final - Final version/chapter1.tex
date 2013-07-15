@@ -1,0 +1,24 @@
+%%-----------Chapter start-------------------------------------
+%%-----------Chapter 1------------------------------------------
+\chapter{Introduction}
+\label{chap:1}
+\setcounter{secnumdepth}{3} \pagenumbering{arabic}
+\setcounter{page}{1} \pagestyle{myheadings}
+\markboth{}{}\markright{} \rhead{\thepage} \setcounter{page}{1}
+\pagestyle{myheadings} \pagenumbering{arabic} \rhead{\thepage}
+\setcounter{page}{1}
+
+\section{Motivation}
+
+A problem is in $P$ means it has a polynomial time algorithm and in $NP$ means though it might be hard to find a solution but once found it can be verified in polynomial time. “P versus NP” problem is a major unsolved problem in theoretical computer science. The Clay Mathematics Institute in Cambridge, MA, has named “P versus NP” as one of its “Millennium” problems, and offers \$1 million to anyone who provides a verified proof. Lots of important problems are $NP$ problems and we would love to solve them in polynomial time. Suppose an advertising company on Facebook is wondering what is the biggest group of people who are friends with each other. This question is an instance of a well known NP hard problem called Clique. Another beautiful problem is called Knapsack where we are given with a set of items and we have to choose the most profitable ones within a certain bound. This problem naturally occurs in transportation. Sending a spaceship to space needs a calculated decision of which item to take within a certain weight and size bound. These problems are hard to solve being $NP$ hard problems. Though we face these kinds of problems in real life all the time but being $NP$ hard problems those are hard to solve. The best we can do is rather than finding the exact solution we can look for a solution that is close to the optimal solution. 
+ 
+
+What does it mean to find a solution close to the optimal one? There are many ways of looking at it. The standard way is to when we want to find something that would be almost as good as optimal solution such as, when we are looking for a Maximum clique in a graph we may be content with a clique that has a fewer less node than the maximum.  Standard notion of approximation is we try to get a solution which is as good as some value function as an optimal solution.  But sometimes this real approximation algorithms are not exactly what we want. 
+
+
+One of the motivations from the paper \cite{HMRW07} was that in Cognitive psychology, people talk about belief systems , they really want certain beliefs to be the same as the actual belief . From another paper \cite{SY03}  there was a beautiful example of the structure seen on a tomogram. A radiograph (x-ray) of a selected layer of the body made by tomography. A tomogram is a two-dimensional image representing a slice or section through a three-dimensional object. So, we are not getting the correct structure of the object in the x-ray film through a tomogram. Thoguh given many x-ray images, the internal structure can be determined but it is $NP$ hard to compute. But we are not interested in just something that resembles superficially over there, we want to know what the structure of the solution is. This kind of approximation Hamilton, van Rooij, Miller and Wareham \cite{HMRW07} called it Structure approximation where rather than focusing on the value of the solution, what we really want to know is the structure of the solution. That's why they define structure approximation problem in which there is an additional parameter called the distance function. Rather than comparing the values of two solutions they are looking at the distance of two solutions and trying to optimize that. Here, we will mostly use Hamming distance as the distance function as we will be dealing with binary strings.
+
+\section{Chapter Organization}
+
+In the following chapters we will talk about various approaches to approximation in chapter~\ref{chap:2}, Inapproximibility results for different problems in chapter~\ref{chap:3} where we will find out different distance functions used to prove these results. Then we will talk about some positive results on structure approximation in chapter~\ref{chap:4} followed by conclusion in chapter~\ref{chap:5}. 
+

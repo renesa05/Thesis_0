@@ -1,0 +1,229 @@
+%%----------Chapter 2------------------------------------------
+
+
+
+{
+
+\chapter{Various approaches to approximation}
+\label{chap:2}
+----
+
+\section{Computational complexity setting}
+
+There are many important computational problems that are tough to solve in a best possible way. As a matter of fact, most of those problems are NP-hard, that means no polynomial-time algorithm exists that resolves the problem in a most favourable way unless $P = NP$. 
+
+\begin{definition}
+The class $P$ of polynomial-time decidable languages is $P= \bigcup_{k\geq 1} Time(n^k)$. 
+\end{definition}
+
+For some function $f$ :$\mathbb{N}\rightarrow \mathbb{N}$, Time($f(n)$) = $\{L|L$ is decided by some TM in at most $f(n)$ steps$\}$.
+
+$P$ is known to contain many natural problems, including the decision versions of linear programming, calculating the greatest common divisor, and finding a maximum matching.
+
+\begin{definition}
+Let $L\subseteq \Sigma^*$. We say $L\in NP$ if there is a two-place predicate $R\\subseteq \Sigma^* \times \Sigma^*$ such that $R$ is computable in polynomial time, and such that for some $c,d\in \mathbb{N}$ we have for all $x \in \Sigma^*$, $x \in L \Leftrightarrow \exists y \in \Sigma^*$, $|y|\leq c|x|^d$ and $R(x,y)$.
+\end{definition}
+
+
+\begin{definition}\cite{AB09}
+We say a language $A\subseteq{0,1}^*$ is a polynomial-time Karp reducible to a language $B\subseteq{0,1}^*$ denoted by $A\leq_{p}B$ if there is a polynomial-time computable function $f:{0,1}^* \rightarrow {0,1}^*$ such as that for every $x\in{0,1}^*$, $x\in A$ if and only if $f(x)\in B$.
+We say that $B$ is $NP-hard$ if $A\leq_{p}B$ for every $A \in NP$. We say that $B$ is $NP-complete$ if $B$ is $NP-hard$ and $B\in NP$.
+
+\end{definition}
+
+It is easy to see that $P \subseteq NP$, since any problem that can be solved in polynomial time can also have its solutions verified as correct in polynomial
+time. \cite{Cormen2001}. 
+
+Maximum Clique problem (Max-Clique) could be a common example of NP-hard problem: Given a group of vertices some of which have edges in between them, the maximum clique is the largest subset of vertices in which each point is directly connected to every other vertex in the subset.
+
+\begin{definition}
+In a decision problem, given an input $x\in {0,1}^*$, we are required to give a YES/NO answer.
+\end{definition}
+
+\begin{definition}
+In a search problem, given an input $x\in {0,1}^*$ we want to compute some answer $y\in {0,1}^*$ that is in some relation to $x$, if such a $y$ exists.
+\end{definition}
+
+\section{Heuristic vs. Approximation algorithm}
+
+When we want to solve a problem in “real life”, we are interested in finding a solution, not just knowing if one exists. Yet we have always formulated problems in terms of decision, meaning we pose a question and want to know whether the answer is “yes” or “no”. In fact, for every problem we have considered, there is a corresponding search problem.
+
+Every NP problem comes in two versions, a decision version and a search version. For example:
+Problem: SAT
+Input: <$\Phi$> where $\Phi$ is a CNF formula
+Decision Problem: Is $\Phi$ satisfiable?
+Search Problem: Find a satisfying assignment to $\Phi$ if one exists, else output $\tau$.
+Here $\tau$ is a special symbol used to indicate that there is no solution.
+
+The Sat problem we have looked at, and shown to be NP-complete, is the decision problem. In the search version of the problem, we can't stop merely at saying "`yes"' or "`no"' to the question of whether the given formula is satisfiable; if the answer is "`yes"' we must actually find and output a satisfying assignmen
+
+\begin{definition}
+An Heuristic model is a computational method that uses trial and error methods to approximate a solution for computationally difficult problems. It does not aim to find the optimal solution, sacrificing optimality for improved runtime. 
+\end{definition}
+
+As we can see from the definition that an heuristic algorithm may ensure a fast solution but it doesn't ensure the accuracy of the solution. This method can be useful for simpler problems or where we simply don't care about the correctness of the solution rather we only care about the speed at which the solution is produced. 
+
+At this instant the question that arises is what should we do when difficult problems come along, for which we don't expect to find polynomial-time algorithms or heuristic methods doesnt apply? Algorithms that have exponential running time are not effective, if the input size isn't really small. As a result, we need to look for a solution approximately  since absolutely the optimal solution is not before us. Most likely we would like to have a guarantee of being close to it. As an example, we can have an algorithm for Euclidean TSP that always develops a tour whose length is at most a factor  $\rho$ times the minimum length of a tour, for a small value of $\rho$. An algorithm which produces a solution which is ensured to be within some factor of the optimum is called an approximation algorithm.
+
+As mentioned earlier, NP-hard problems has no polynomial time algorithms unless $P = NP$ and to find out the solution of those problems the best possible way is to use Approximation algorithm which will return the solution within some factor of the optimum or exact solution. Approximation algorithms also bring down the running time of the problem which could have exponentially huge running time if Approximation Algorithms were not used.
+
+
+So, the performance of Approximation algorithm is an important issue. While it is assumed that every approximation algorithm is polynomial but there exist a lot of polynomial algorithm which can be inefficient and impractical. So, in order to get better approximation bound one can invest more running time to the algorithm. From this trade-off between approximation result and running time the notion of Approximation schemes arise. \cite{Hochbaum1996}
+
+PTAS and FPTAS are those approximation schemes. As we may guess that the better the approximation, the larger may be the running time. A problem has PTAS if the running time is polynomial in the size of the input and a problem has FPTAS if the running time is polynomial both in size of the input and the inverse of the performance ration$(1/\epsilon)$.\cite{ACGKSP99}. So, the classes of problems that has FPTAS are contained in classes of problems that has PTAS. For structure approximation we have sPTAS and sFPTAS as structure approximation scheme.
+
+
+\begin{definition}[PTAS]
+Let $P$ be an NP optimization problem. An algorithm $A$ is said to be a polynomial time approximation scheme (PTAS) for $P$ if, for any instance $x$ of $P$ and any rational value $r>1$, A when applied to input (x,r) returns an r-approximate solution of $x$ in time polynomial in $\left|x\right|$. \cite{ACGKSP99}
+\end{definition}
+
+\begin{definition}[FPTAS]
+
+An algorithm $A$ is said to be a fully polynomial time approximation scheme (PTAS) for $P$ if, for any instance $x$ of $P$ and any rational value $r>1$, A when applied to input (x,r) returns an r-approximate solution of $x$ in time polynomial both in $\left|x\right|$ and in $1/(r-1)$. \cite{ACGKSP99}
+\end{definition}
+
+
+\subsection{Value-approximation algorithm}
+
+Many types of approximation algorithms have already been defined. 
+\begin{definition}[Value-approximation algorithm]
+If the $val (x, A(x))$ is within some absolute or relative factor of $optval(x)$; we refer to it as value-approximation algorithm.
+\end{definition}
+
+Some classes of value-approximation are defined as following:
+
+
+
+
+\begin{definition}[Additive value-approximation (v-a-approx) algorithm]
+Given an optimization problem $\pi$ and a no-decreasing function $h: N\rightarrow N$, an algorithm $A$ is a polynomial time $h(\left|x\right|)$ additive value-approximation (v-a-approx) algorithm for $\pi$ if for every instance $x$ of $\pi$, $\left|optval(x)-val(x,A(x))\right|)
+\leq h(\left|x\right|)$ and $A$ runs in time polynomial in $\left|x\right|$. \cite{HMRW07}
+\end{definition}
+
+
+
+\begin{definition}[Ratio value-approximation (v-r-approx)algorithm]
+Given an optimization problem $\pi= (I, cansol, val, goal)$ and a non decreasing function $h: N\rightarrow N$, an algorithm $A$ is a polynomial time $h(\left|x\right|)$ ratio value-approximation (v-r-approx)algorithm for $\pi$ if for every instance $x\in I$ , $R(x,A(x))\leq h(\left|x\right|)$, where $R(x,A(x)) =\frac{optval(x)}{val(x,A(x))}$ (if goal=MAX) or $\frac{val(x,A(x))}{optval(x)}$ (if goal=MIN), and $A$ runs in polynomial time in $\left|x\right|$. \cite{HMRW07}
+\end{definition}
+
+
+
+\subsection{Positive approximation results for different problems}
+
+
+A question may arise that how good can be an approximation algorithm? A nice sorting of these approximation results can be found in \cite{Hochbaum1996} where the author sorted the results according to "good", "better", "best", "better than best", "wonderful" categories. [see table 2.1]
+
+\begin{table}[ht]
+\caption{Approximation results of different problems} % title of Table
+\begin{center}
+    \begin{tabular}{ | l | p{6cm} | p{5cm} |}
+    
+    
+    \hline
+		\textbf{Category} & \textbf{Category definition} & \textbf{Example} \\ \hline
+    Good & Has a $\delta$-approximation for some constant $\delta$ & Vertex cover problem, MAX CUT \\ \hline
+		Better & Has an Approximation Scheme(PTAS, FPTAS) for the problem & KNAPSACK, Minimum makespan \\ \hline
+		Best & Has a polynomial c-approximation algorithm & k-Center problem \\ \hline
+		Better than best & Has a certain asymptotic performance ratios & Bin packing, Edge coloring  \\ \hline
+		Wonderful & Delivers solution within 1 of the optimum & Edge coloring in simple graphs, Coloring of planar graphs, Min max degree spanning tree \\ \hline
+		
+		
+		\end{tabular}
+\end{center}
+
+\end{table}
+
+\section{Problem definitions}
+We will see the definitions of the problems that has been used frequently here. 
+
+\begin{definition}[Clique]
+A clique in an undirected graph $G = (V, E)$ is a subset of the vertex set $C \subseteq V$, such that for every two vertices in $C$, there exists an edge connecting the two.
+\end{definition}
+
+
+\begin{figure}
+\scalebox{3} % Change this value to rescale the drawing.
+{
+
+
+\begin{pspicture}(0,-1.42)(2.44,1.42)
+
+\psline[linewidth=0.04cm](0.0,-1.4)(2.42,1.4)
+
+\end{pspicture} 
+
+
+
+
+%\begin{pspicture}(0,-0.9)(2.28,0.9)
+
+%\psellipse[linewidth=0.04,dimen=outer](1.14,0.0)(1.14,0.9)
+
+%\end{pspicture}
+
+
+
+
+
+
+}
+\caption{Test pspicture}
+\end{figure}
+
+
+
+
+
+\begin{definition} [Max-Clique]
+A maximum clique is a clique of the largest possible size in a given graph
+\end{definition}
+
+
+\begin{definition}[Knapsack]
+Given a set of items, each with a weight and a value, determine the number of each item to include in a collection so that the total weight is less than or equal to a given limit and the total value is as large as possible.
+\end{definiton}
+
+\begin{definition}[Shortest Vector]
+Given a lattice  $L$, Shortest Vector problem asks to find the shortest non-zero vector in $L$ .
+\end{definition}
+
+\begin{definition} [SAT]
+Given a collection $C$ = ${c_1, c_2, . . . , c_m}$ of clauses, where each clause consists of a set of literals (representing the disjunction of those literals) over the finite set of Boolean variables $U$ = ${u_1, u_2, . . . , u_n}$, is there an assignment of truth values to $U$ which makes every clause true ?
+
+\end{definition}
+
+\begin{definition} [3-SAT]
+A version of the SAT problem in which every clause has 3 literals.
+
+
+
+\end{definition}
+\section{Inapproximability Results}
+
+\section{Structure Approximation} 
+
+When we talk about Approximation, we mainly talk about value-approximation where the value of the candidate solution is what we care about. But there can be another possibility where the structure of the solution is considered important rather than the value. This kind of approximation was discussed by Hamilton, M{\"u}ller , van Rooij and Wareham in their paper "`Approximating Solution Structure"'where they posed the question of complexity of solving NP-hard optimization problems in Structure Approximation framework. 
+
+In this paper they propose definitions of structure appoximation and it's classes. They also try to show the relation between structure and value approximation for different problems. They also ask some interesting question regarding this framework. In this section we mainly will see a summery of their work on structure approximation.
+
+\begin{definition}[Structure-approximation algorithm]
+Given an optimization problem $\Pi$ and a sd-function d, and a non-decresing function $h:\mathbb{N} \rightarrow \mathbb{N}$, an algorithm $A$ is a polynomial-time $h(|x|)/d$ structure-approximation(s-approx) algorithm if for every instance x of $Pi$, $d(A(x),optsol(x))\leq h(|x|)$ and $A$ runs in time polynomial in $|x|$.
+\end{defintion}
+
+Here, the degree of similarity of structures between candidate solution and optimal solution is measured by a distance function which they call solution distance(sd) function. 
+
+\begin{definition}[Solution distance(sd) function]
+Let $d: \Sigma^* x \Sigma^* \rightarrow \mathbb{N}$ be a solution distance(sd) function associated with an optimization problem $Pi$ such that for an instance $x$ of $Pi$ and $y,y' \in cansol(x), d(y,y')$ is the distance between these solutions.
+\end{definition}
+
+A sd-function $d$ is a metric and it has four properties: 
+1. For all $x,d(x,x)$ = 0
+2. For all distinct $x$ and $y$ , $d(x,y)>0$
+3. For all $x$ and $y$ , $d(x,y)=d(x,y)$ (symmetry)
+4. For all $x$, $y$ and $z$ , $d(x,y) \leq d(x,z)+ d(z,y)$ (triangle inequality)
+
+For most of the examples shown in this paper the authors had used Hamming distance as the distance function. For LCS, Edit distance was used as the distance function about which we will discuss in a later chapter.
+
+\begin{definiton}[Hamming distance]
+The Hamming distance between two strings of equal length is the number of positions at which the corresponding symbols are different.
+\end{definition}

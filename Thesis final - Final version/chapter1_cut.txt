@@ -1,0 +1,203 @@
+\section{Approximation Algorithm}
+
+There are many important computational problems that are tough to solve in a best possible way. As a matter of fact, most of those problems are NP-hard, that means no polynomial-time algorithm exists that resolves the problem in a most favourable way unless $P = NP$. 
+\item The class P consists of those problem which are solvable in polynomial time. That means those can be solved in time $O(n^k)$ for some constant $k$, where $n$ is the size of the input to the problem. 
+\item The class NP consists of problems those are verifiable in polynomial time. That means if a "certificate" of the solution is given;that can be verified in polynomial time in the size of the input to the problem. It is easy to see that $P \subseteq NP$, since any problem that
+can be solved in polynomial time can also have its solutions verified as correct in polynomial
+time. \cite{Cormen2001}. 
+
+
+Euclidean travelling salesman problem (Euclidean TSP) could be a common example of NP-hard problem: Given a set of points on the plane, the goal is to find the shortest tour that visits all the points. Another important NP-hard problem is independent set: given a graph $G = (V,E)$ , a maximum-size independent set $V^{*}\subset V$ needs to be found. 
+
+At this instant the question that arises is what should we do when such difficult problems come along, for which we don't expect to find polynomial-time algorithms? Algorithms that have exponential running time are not effective, if the input size isn't really small. As a result, we need to look for a solution approximately  since absolutely the optimal solution is not before us. Most likely we would like to have a guarantee of being close to it. As an example, we can have an algorithm for Euclidean TSP that always develops a tour whose length is at most a factor  $\rho$ times the minimum length of a tour, for a small value of $\rho$. An algorithm which produces a solution which is ensured to be within some factor of the optimum is called an approximation algorithm.
+
+As mentioned earlier, NP-hard problems has no polynomial time algorithms unless $P = NP$ and to find out the solution of those problems the best possible way is to use Approximation algorithm which will return the solution within some factor of the optimum or exact solution. Approximation algorithms also bring down the running time of the problem which could have exponentially huge running time if Approximation Algorithms were not used.
+
+
+So, the performance of Approximation algorithm is an important issue. While it is assumed that every approximation algorithm is polynomial but there exist a lot of polynomial algorithm which can be inefficient and impractical. So, in order to get better approximation bound one can invest more running time to the algorithm. From this trade-off between approximation result and running time the notion of Approximation schemes arise. \cite{Hochbaum1996}
+
+PTAS and FPTAS are those approximation schemes. As we may guess that the better the approximation, the larger may be the running time. A problem has PTAS if the running time is polynomial in the size of the input and a problem has FPTAS if the running time is polynomial both in size of the input and the inverse of the performance ration$(1/\epsilon)$.\cite{ACGKSP99}. So, the classes of problems that has FPTAS are contained in classes of problems that has PTAS. For structure approximation we have sPTAS and sFPTAS as structure approximation scheme.
+
+
+\begin{mydef}[PTAS]
+Let $P$ be an NP optimization problem. An algorithm $A$ is said to be a polynomial time approximation scheme (PTAS) for $P$ if, for any instance $x$ of $P$ and any rational value $r>1$, A when applied to input (x,r) returns an r-approximate solution of $x$ in time polynomial in $\left|x\right|$. \cite{ACGKSP99}
+\end{mydef}
+
+\begin{mydef}[FPTAS]
+
+An algorithm $A$ is said to be a fully polynomial time approximation scheme (PTAS) for $P$ if, for any instance $x$ of $P$ and any rational value $r>1$, A when applied to input (x,r) returns an r-approximate solution of $x$ in time polynomial both in $\left|x\right|$ and in $1/(r-1)$. \cite{ACGKSP99}
+\end{mydef}
+
+
+\subsection{Value-approximation algorithm}
+
+Many types of approximation algorithms have already been defined. 
+\begin{mydef}[Value-approximation algorithm]
+If the $val (x, A(x))$ is within some absolute or relative factor of $optval(x)$; we refer to it as value-approximation algorithm.
+\end{mydef}
+
+Some classes of value-approximation are defined as following:
+
+
+
+
+\begin{mydef}[Additive value-approximation (v-a-approx) algorithm]
+Given an optimization problem $\pi$ and a no-decreasing function $h: N\rightarrow N$, an algorithm $A$ is a polynomial time $h(\left|x\right|)$ additive value-approximation (v-a-approx) algorithm for $\pi$ if for every instance $x$ of $\pi$, $\left|optval(x)-val(x,A(x))\right|)
+\leq h(\left|x\right|)$ and $A$ runs in time polynomial in $\left|x\right|$. \cite{HMRW07}
+\end{mydef}
+
+
+
+\begin{mydef}[Ratio value-approximation (v-r-approx)algorithm]
+Given an optimization problem $\pi= (I, cansol, val, goal)$ and a non decreasing function $h: N\rightarrow N$, an algorithm $A$ is a polynomial time $h(\left|x\right|)$ ratio value-approximation (v-r-approx)algorithm for $\pi$ if for every instance $x\in I$ , $R(x,A(x))\leq h(\left|x\right|)$, where $R(x,A(x)) =\frac{optval(x)}{val(x,A(x))}$ (if goal=MAX) or $\frac{val(x,A(x))}{optval(x)}$ (if goal=MIN), and $A$ runs in polynomial time in $\left|x\right|$. \cite{HMRW07}
+\end{mydef}
+
+
+
+\subsection{Approximation results for different problems}
+
+
+A question may arise that how good can be an approximation algorithm? A nice sorting of these approximation results can be found in \cite{Hochbaum1996} where the author sorted the results according to "good", "better", "best", "better than best", "wonderful" categories.
+
+\begin{table}[ht]
+\caption{Approximation results of different problems} % title of Table
+\begin{center}
+    \begin{tabular}{ | l | p{6cm} | p{5cm} |}
+    
+    
+    \hline
+		\textbf{Category} & \textbf{Category definition} & \textbf{Example} \\ \hline
+    Good & Has a $\delta$-approximation for some constant $\delta$ & Vertex cover problem, MAX CUT \\ \hline
+		Better & Has an Approximation Scheme(PTAS, FPTAS) for the problem & KNAPSACK, Minimum makespan \\ \hline
+		Best & Has a polynomial c-approximation algorithm & k-Center problem \\ \hline
+		Better than best & Has a certain asymptotic performance ratios & Bin packing, Edge coloring  \\ \hline
+		Wonderful & Delivers solution within 1 of the optimum & Edge coloring in simple graphs, Coloring of planar graphs, Min max degree spanning tree \\ \hline
+		
+		
+		\end{tabular}
+\end{center}
+
+\end{table}
+
+
+\begin{mydef}[c-approximation algorithm]
+For an optimization problem if the problem of approximation within $c-d$ is NP-complete for any $\delta>0$, then it is called a polynomial c-approximation algorithm. \cite{Hochbaum1996}
+\end{mydef}
+
+
+Problem definitions\cite{Hochbaum1996} :
+
+\
+
+\textbf{[VC] Vertex Cover}
+
+\textit{Instance}: A graph $G=(V,E)$, vertex weight $w_{v}$ for all $v \in V$
+
+\textit{Objective}: Find a subset of vertices $C \subseteq V$ that forms a cover so that each edge $e \in E$ has at least one of its endpoints in $C$ such that $\sum_{v \in C}w_{v}$ is minimized.
+
+\
+
+\textbf{[MAX CUT] Maximum Cut}
+
+\textit{Instance}: A graph $G=(V,E)$.
+
+\textit{Objective}: Find a subset $C$ of the vertices that maximizes the number of edges that have one vertex in $C$ and one not in $C$.
+
+\
+
+\textbf{[MM] Minimum makespan}
+
+\textit{Instance}: A set of jobs $J$={1,....,$n$} with associated processing times $p_{1},...,p_{n}$; a positive integer $m<n$.
+
+\textit{Objective}: Partition $J$ into subsets $J_{1},...,J_{m}$ such that max$_{1\leq i \leq m}$ $\sum_{j\in J_{i}}p_{j}$ is minimized.
+
+\
+
+\textbf{[k-CEN] k-Center}
+
+\textit{Instance}: A graph $G=(V,E)$ with edge weights $w_{(i,j)}$ for $(i,j)\in E$ and a parameter $k\leq|V|$
+
+\textit{Objective}: Find a set $S,|S|=k$ so that max$_{v\in V}$ min$_{s\in S}$ $w_{(v,s)}$ is minimized. 
+
+\
+
+\textbf{[PA] Packing}
+
+\textit{Instance}: Let $Z_{+}$ denote the non-negative integers, $A$ be an $m * n$ matrix over $Z_{+}$, $b$ be a vector over $Z^{m}_{+}$, and $x$ and $w$ be vectors over $Z^{n}_{+}$.
+
+\textit{Objective}: Maximize $w^T.x$ subject to $Ax\leq b$.
+
+\
+
+\textbf{[COL-EDGE] Edge coloring}
+
+\textit{Instance}: A graph $G=(V,E)$
+
+\textit{Objective}: Assign a color (namely, an integer) to each edge that no two adjacent edges have the same color and such that the number of different color is minimized.
+
+\section{Hardness of approximation results}
+
+The main motivation behind designing an approximation algorithm for a NP-hard problem is to find an efficient approximate solution for that problem. But not all NP-hard problems has approximate solutions. Some of these problems don't have any efficient algorithms that can achieve an approximation beyond a certain threshold. These results are known as 
+"inapproximability" or "hardness of approximation results" , which are proved under the general hypothesis $P \neq NP$.
+
+
+The problems having inapproximability results are divided into four classes based on the hardness of their approximation ratio. The following table shows the different classes and their appoximation ration which is hard to achieve.[HOCHBAUM+see dr. Arora's papers]
+
+ 
+\begin{table}[t]
+\caption{Classification of problems based on their inapproximability results } % title of Table
+\begin{center}
+    \begin{tabular}{ | c | c | c |}
+    
+    
+    \hline
+		\textbf{Class} & \textbf{Factor of Approximation that is hard} & \textbf{Examples} \\ \hline
+    I & $1+\epsilon$ & MAX-3SAT \\ \hline
+		II & $O(log n)$ & SETCOVER \\ \hline
+		III & $2^log^{1-\lambda}n$& LABELCOVER \\ \hline
+		IV & $n^\epsilon$ & CLIQUE \\ \hline
+		
+		
+		
+		\end{tabular}
+\end{center}
+
+\end{table}
+
+The main idea to prove the inapproximability result for a NP-hard problem is to start with a known inapproximable problem first and then perform a gap-preserving reduction from that problem to the given problem. As MAX-3SAT is the most basic inapproximable problem so all other problems from different classes are proved to be inapproximable by the help of MAX-3SAT.
+
+
+\begin{mydef}[Gap preserving reduction]
+Let $\Pi$ and $\Pi^'$ are two maximization problems. A gap-preserving reduction from $\Pi$ to $\Pi^'$ with parameters $(c,p),(c^',p^')$ is a polynomial-time algorithm $f$. For each instance of $I$ of $\Pi$, algorithm $f$ produces an instance $I^'$=$f(I)$ of $\Pi^'$ . The optimal of $I$ and $I^'$, say $OPT(I)$ and $OPT(I^')$ respectively, satisfy the following property:
+
+			$OPT(I)\geq c \Longrightarrow OPT($I^{'}$)\geq $c^{'}$
+			
+			OPT(I) < \dfrac{c}{p} \Longrightarrow OPT($I^{'}$)< \dfrac {c^{'}}{p^{'}}$
+			 
+\end{mydef}
+
+Add PCP!
+
+\section{Structural Approximation}
+
+As we have seen in the last section, what is Approximation Algorithm and how it plays an important part to find a solution for some computation problems. The next question that can arise in one's mind is that how can we approximate an optimum solution. One possibility is that a candidate solution is considered an approximation to the extent that its value is closer to the optimal value. This type of approximation is called value-approximation. There is another possibility, according to which a candidate solution is considered an approximation of the optimal solution to the extent that it resembles the optimal solution itself. This kind of approximation is called structure-approximation \cite{HMRW07}.
+
+
+
+If we consider Approximation algorithm in the domain of cognitive science , we can see the importance of structural-approximation right away. The cognitive outcomes of problems are usually modelled as the outcome of intractable optimization problems and it may not be realistic to compute such outputs by the cognitive scientists with their limited resources. But as the outcome of optimization problem seems to predict and explain human cognitive outcomes well, it has been proposed that the cognitive scientists may somehow approximate the optimal outputs[add the reference page 2]. In this context it is called structural-approximation. Millgram[] has done some work which is relevant to structural-approximation and \cite{HMRW07} was inspired by that research.
+
+\\Add F Coherence 
+
+\subsection{Solution Structural Approximation Algorithms}
+
+\subsection{The relationship between value and structural approximation}
+
+\subsubsection{Structural approximation implies Value approximation}
+
+Consider the MAX CLIQUE problem (see figure ). The graph at left side has a MAX CLIQUE of value 4 and the graph at right side has a  MAX CLIQUE of value 4. Though the differ by (4-3)=1 in their value but they are as far apart in structure as possible.
+
+Figure [max clique]
+
+\subsubsection{Dissociation between Structural approximation and Value approximation}  
+
+MAX CUT

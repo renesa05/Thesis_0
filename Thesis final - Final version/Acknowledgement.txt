@@ -1,0 +1,10 @@
+Acknowledgments
+I thank my supervisor, Markus Kuhn, for extensive guidance and valuable advice on
+rigorous design and research.
+I am grateful to Mike Bond and Steven Murdoch for many useful discussions on EMV.
+Saar Drimer and Sergei Skorobogatov have been extremely helpful with hardware advice
+and even hands-on support.
+Thanks also to Frank Stajano for suggesting this very exciting project and to Ross Anderson
+for the trust and advice.
+Last I thank my wife Daniela, for all the moral support during hard times.
+Thank you all for an extraordinary and challenging experience.

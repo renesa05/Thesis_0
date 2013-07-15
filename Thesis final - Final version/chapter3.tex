@@ -1,0 +1,297 @@
+%%-----------Chapters start-------------------------------------
+%%-----------Chapter 4------------------------------------------
+\chapter{Lower Bounds/ Inapproximibility results}
+\label{chap:3}
+
+\subsection{General functions}
+
+\subsection{Hamming lower bounds}
+---the following papers are under this section
+
+\subsection{Gal, Halevi, Lipton and Petrank: Partial and Approximate NP-witnesses}
+
+
+"`Is it easier to find parts of the solution than getting it all?"' This is the exact question which motivated Gal, Halevi, Lipton and Petrank \cite{GHLP99} to find out the "`Partial approximation"' for several important problems in NP such as, 3SAT, Graph Isomorphism, the Shortest Lattice Vector problem, Graph 3-Colorability, Vertex Cover and Clique. They show in this paper that the answer to the initial question asked by them is "`No"' and they find out that retrieving parts of the solution is as hard as retrieving the full solution. 
+
+So, one can easily get confused with "`finding parts of the solution"', "`the actual solution"' and "`their relationship"'. Suppose we look at the problem Graph Isomorphism. Their result \cite{GHLP99} implies that finding a small part of the isomorphism is enough rather than build the whole isomorphism.  So, if we can find a way to construct a small part of the isomorphism; with their technique we can easily build the whole isomorphism. 
+
+One more thing that should be considered with their technique is the issue in fault toralence. That means if a solution is send to us through a communication channel which ommits a part of it, can we still recover the full solution? In this paper they provide a positive answer for this problem by using "`Omission-correcting algorithms"' for those specific problems.
+
+Their work is also motivated by cryptographic applications where a important question in this particular field is the relation between retrieving partial information about a secret and computing the whole secret. They provide some insight into this interesting question. They also try to find out the power of oracles that only supply part of the solutions.
+
+
+\subsection{Some results}
+
+\begin{enumerate}
+\item (Satisfiability (SAT)): For any $\epsilon > 0$, given a CNF formula over $n$ variables it is possible to construct in probabilistic polynomial time another formula $\Phi^{1}$ variables (with $|\Phi^{'}|=|\Phi|+ n^{O(1)}$, such that with probability almost 1, given any $N^{1/2+\epsilon}$ bits from a satisfying assignment to $\Phi^{'}$, one can efficiently construct a satisfying assignment to $\Phi$. \cite{GHLP99}
+
+They try to erase upto 1/2 of the variables first but their solution doesn't work as they failed to implement the method of amplification which \cite{FLN00} successfully implemented later on (it will be discussed later on this chapter). After that they try to erase less than half of the variables and use padding technique to get their desired result which they succeed. Atlast they try to erase nearly all the bits(variables) and surprisingly found out that it has better correction ability of erasure codes. 
+
+
+\item (Graph Isomorphism) : There is a (deterministic) polynomial time procedure that on a given pair of graphs $(G,H)$ constructs adaptively $l=poly(n)$ oracle queries $(G_1,H_1),....,(G_l,H_l)$ such that if on each query the oracle answers with a map on only $O(log n)$ of the variables (which is a part of isomorphism between the two graphs in this query), then procedure finds an isomorphism between $G$ and $H$. \cite{GHLP99}
+
+\item (Other NP-complete problems): In this paper they also show results for some more NP-complete problems such as the Shortest Lattice Vector problem, Graph 3-Colorability and they claim that they had also solved the results for Vertex Cover and Clique and also say that for Clique the proof is even more straight forward where they can use standard reduction without padding. 
+
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Kumar and Sivakumar: hard-to-approximate witnesses for all NP languages}
+
+Motivated by \cite{GHLP99} as well as then-recent PCP theorem, Kumar
+and Sivakumar \cite{KS99} set out to generalize the results of
+\cite{GHLP99} to all of NP problems.  They presented several
+constructions based on list-decodable
+codes (in fact, now their paper is most cited for their code
+constructions). There, \cite{KS99} considered both the erasure setting of
+\cite{GHLP99} (where only a subset of bits is known, but known bits
+are all correct), and a ``noisy proof system'' setting much more akin
+to the structure approximation with respect to Hamming distance: a witness was
+guaranteed to agree with some correct witness on at least a given
+fraction of bits. Their main idea can be described as follows
+(following the notation in \cite{FLN00}). 
+
+\begin{definition}\label{R-hat}
+Let $L$ be a language in NP. Then by definition there is a
+polynomial-time computable relation $R_L(x,y)$ such that $x \in L$ iff
+$\exists y, |y| \leq |x|^c \wedge R_L(x,y)$, where $c$ is a
+constant. Now, consider a different relation $\hat{R}_L(x,w)$, with
+$|w|\leq |x|^d$, defined as $\hat{R}_L(x,w) \equiv \exists y,
+(w=Code(y) \wedge R_L(x,y))$. Here, $Code(y)$ is an error-correcting
+code (more on it later).  
+\end{definition}
+
+Thus, if there is a polynomial time algorithm that decodes $w=Code(y)$
+to obtain $y$, then the relation $\hat{R}_L$ is a polynomial-time
+relation.
+
+Now, assume that for some specific code such a decoding algorithm
+exists. Also assume that this code can recover a string with
+$1/2-\epsilon$ fraction of errors (possibly in the list-decoding
+regime). Then to decide $L$ it is enough to find a $1/2+\epsilon$
+approximation of $w$. That is, approximating $w$ to within
+$1/2+\epsilon$ is as hard as solving the original problem; in
+particular, if $L$ is NP-complete, then such approximation is NP-hard.
+
+Note that information-theoretically this is not an optimal witness:
+$w$ can be significantly larger than $y$, so half the bits of $w$
+could be longer than all of $y$. This is one of the issues addressed by
+\cite{FLN00}. 
+
+\begin{theorem}[\cite{KS99}]
+Given an approximation $w_1$ to a binary string $w$, it is possible to
+recover $w$ if $w_1$ agrees with $w$ on at least $1/2+\epsilon$
+fraction of bits, where $\epsilon \geq 1/|w|^{1/5}$. 
+\end{theorem}
+
+Another way to state it is that there is a way to recover a witness
+given a string that agrees with it on at least
+$|w|/2+|w|^{4/5+\epsilon'}$ bits, for $\epsilon'>0$.  The proof of
+this claim follows from the constructions for erasure codes in the
+main body of the paper, together with the Johnson's bound.
+
+More specifically, the paper provides three constructions of
+erasure codes. All three constructions consist of the Reed-Solomon
+code as an outer code, and three different inner codes. That is, a
+string $y$ is first viewed as a sequence of evaluations of a
+polynomial $p_y(u)= \Sigma_j y_j u^j$ over $u\ F_q$ for a chosen field
+$F_q$ with $q$ elements. Treating this as a binary string, each of the
+$q$ terms is $\log q$ bits in length; these $\log q$ bit blocks are
+each encoded by an ``inner code''. The choice of the inner code
+determines the final parameters.   
+
+\begin{theorem}[\cite{KS99}]
+For every language $L \in NP$, every witness predicate $R_L(x,y)$, and
+every $\epsilon >0$ there exists a witness predicate $\hat{R}_L(x,w)$
+as defined above that given $N^\delta$ bits of $w$, recovers $y$
+satisfying $R_L(x,y)$ in polynomial time. The three constructions give
+the following parameters:
+\begin{enumerate}
+\item (Using Hadamard inner code): $\delta = 3/4+\epsilon$ and 
+ $|w|=q^2$, where $q$, the field size,  is a power of two $\geq (4n)^{1/{3\epsilon}}$.   
+\item (Using a probabilistic construction for the inner code): $\delta
+= 1/2+\epsilon$, and $|w|=q^{1+\alpha}$,  for
+$\frac{1/2-\epsilon}{1/2+\epsilon} < \alpha <
+\frac{1/2+\epsilon}{1/2-\epsilon}$. However,  to construct such an $\hat{R}_L$
+an algorithm with a slightly superpolynomial running time ($O(2^{(\log
+q)^3})$ is needed.
+\item (Using $l$-wise $\delta$-biased sample space)    
+$\delta
+= 2/3+\epsilon$, and $|w|=q^{1+\alpha}$,  for
+$\frac{1/3-\epsilon}{2/3+\epsilon} < \alpha <
+\frac{1/6+\epsilon+\gamma}{1/3-\epsilon}$, where $0 < \gamma <
+\epsilon$ is a very small constant.  
+\end{enumerate}
+\end{theorem} 
+
+Those are the parameters on which \cite{FLN00} is based. We omit the
+technical code-theoretic details of the constructions, since we are
+using the codes in the black-box fashion.  
+
+Relatively recently a better construction of such codes appeared due
+to Guruswami and Rudra \cite{GR08}, (journal version
+\cite{GR-journal}). They produce explicit codes list-decodable up to 
+$1/2+\epsilon$ fraction of errors.  Moreover, their codes produce
+$|w|=O(n^3/\epsilon^{3+\gamma})$ for a small constant $\gamma$ (or
+$\tilde{O}(n/\epsilon^{5+\gamma}$); note that the optimal
+non-constructive bounds are $O(n/\epsilon^2)$. Thus, where the codes
+of Kumar and Sivakumar can recover a witness string $w$  from
+$|w|/2+|w|^{4/5+\epsilon'}$ bits, for $\epsilon'>0$, codes of
+Guruswami and Rudra can recover $w$ given 
+$|w|/2+|w|^{2/3+\epsilon'}$ bits.  
+
+%Guruswami and Rudra briefly mention an unpublished manuscript of
+%Sheldon and Young \cite{SY03} that achieves hardness of structure approximation
+%for SAT $|w|/2+|w|^\eta$ for any $\eta$. They mention that this
+%construction does not use list-decodable codes (rather relying on
+%repeating input variables multiple times) and can be generalized to
+%some other natural NP-complete problems. However, since the manuscript
+%appears to have not been published, we do not have much information on
+%that work.  The name, ``Hamming approximation of NP witnesses'', seems
+%to indicate that they concentrated on structure approximation with
+%respect to Hamming distance. 
+
+So what is the relevance of Kumar and Sivakumar work to the structure
+approximation setting? Intuitively, their result (as improved by
+Guruswami and Rudra) states that for every language in NP, there
+exists a witness predicate, with respect to which it is as hard to
+structure-approximate a witness $w$ to within Hamming distance
+$|w|/2+|w|^{2/3+\epsilon'}$ as it is so solve the original
+problem. Thus, for an NP-complete $L$, such witness is NP-hard to
+approximate much better than by taking a random string (note that a
+random string with high probability agrees with a witness on
+$|w|/2+|w|^{1/2}$ bits. ) And therefore for such a predicate, with
+distance function being the Hamming distance, the ``structure
+approximation by dumb luck'' of \cite{HMRW07} is the best possible.
+
+
+
+\subsection{Sheldon and Young: Hamming Approximation of NP Witnesses}
+
+Guruswami and Rudra briefly mention an unpublished manuscript of Sheldon and Young \cite{SY03} that achieves hardness of structure approximation for SAT $|w|/2+|w|^\eta$ for any $\eta$. They were motivated by Feige, Langberg and Nissim's work \cite{FLN00} and set to strengthen their hardness result. They show, for the universal NP-complete language, no deterministic
+polynomial-time algorithm can achieve Hamming distance $n/2$ +$O(\sqrt{nlogn})$ (unless P=NP). Also, no randomized polynomial-time algorithm can achieve $n/2$ +$o(\sqrt{nlogn})$ with probability $1 - 1/n^O(1)$(unless RP=NP)\cite{SY03}.
+
+Another contribution of Sheldon and Young's paper was to find out the lower bounds for randomized algorithms. This result is shown in the following theorem.
+
+\begin{theorem}
+Fix any $\epsilon > 0$. For the universal NP-complete language $\nu$ and it's witness relation $R_\nu$, no polynomial-time algorithm achieves Hamming distance $n/2+\sqrt{\epsilon n\ln n}$ with probability $1-O((n^(2\epsilon+1)sqrt{\epsilon \ln n})^-1)$. 
+\end{theorem}
+
+Here we will discuss their result for SAT. 
+
+\begin{lemma}
+Suppose that, for SAT (with the natural witness relation), there
+exists $\epsilon > 0$ such that some polynomial-time algorithm A achieves Hamming
+distance $n/2 - n^\epsilon$. Then P=NP.
+\end{lemma}
+
+\begin{proof}
+They prove the lemma by describing a polynomial time algorithm $A'$ that solves a SAT in polynomial time. Given a SAT instance $I$ it create new instance $I'$ from $I$ by duplicating a variable $X$; $m$ times where $m$ = $\left\lceil 1+ (n/2)^1/\epsilon - n\right\rceil$. That means $A'$ adds to $I$ new variables ${X^1,X^2,...X^m}$ and adds new clauses $(X^1=X^2)\wedge (X^2=X^3)\wedge...\wedge (X^(m-1)=X^m)$. 
+
+Algorithm $A'$ runs on the instance $I'$ of $A$ to achieve hamming distance $(m+n)/2-(m+n)^\epsilon$. We assume $b$ to be a true or false value which is assigned to atleast $m/2+1$ copies of the variable $X$ in $I'$. We set $X=b$ and substitue $b$ for $X$ in $I'$ and simplify the resulting formula to get a new formula $I''$ and use recursion on $I''$ thus assigning values to all the variables remaining. \cite{SY03}
+\end{proof}
+
+
+Suppose we have a SAT formula, $(x\vee y) \wedge (\bar{x}\vee \bar{z}) \wedge (\bar{y}\vee \bar{u})$ and we assume $\epsilon=1/3$.
+It has 4 variables in the form of x,y,z and u so, $n$ will be 4 here. 
+As we know from the lemma $m$ = $\left\lceil 1+ (n/2)^1/\epsilon - n\right\rceil$
+so, $m$ = $\left\lceil 1+ (4/2)^3 - 4\right\rceil$ = 5 here. 
+
+
+
+
+
+\section{Main tool: Error correcting codes}
+
+
+\begin{definition}\cite{FLN00}
+\emph{Error correcting code-ECC}
+Let $\Sigma$ be an alphabet of size $q$. An $[n,k,d]_q$ error correcting code is a function $C:\Sigma^k \rightarrow \Sigma^n$ with the property that for every $a,b \in \Sigma^k$ we have a $dist(C(a),C(b))$ is greater than or equal to $d$.
+\end{definition}
+
+
+\begin{definition}\cite{FLN00}
+\emph{List decodable ECC}
+Let $\Sigma$ be an alphabet of size $q$. An $[n,k,d]_q$ error correcting code $C$ is $\delta$ list decodable if there exists a Turing Machine $D$(the list decoder) which on input $c\in\Sigma^k$ outputs in poly(n)time a list containing all words $a\in \Sigma^k$ that satisfy $dist(C(a),C(b)) \leq \delta$. 
+\end{definition}
+
+
+
+\begin{definition}
+\emph{Erasure Code}
+\
+\end{definition}
+
+
+
+\begin{definition}\cite{Sud96}
+\emph{Reed Solomon Code}
+For a finite field $F$ of size $n$ and parameter $d$, the Reed Solomon Code is an $\left[n,d+1,n-d\right]$-code over $F$, whose codewords are the strings ${(p(0),p(w),p(w^2),...p(w^{|F|-1}))_p}$, where w is some fixed primitive element of $F$ and $p$ ranges all polynomials of degree at most $d$ over $F$.
+\end{definition}
+
+\begin{definition}\cite{Sud00}
+\emph{Hadamard Code}
+For any $k$, the Hadamard code $H_k$ is a $(n=q^k,k)_q$ code with distance $(1-1/q)q^k$, obtained as follows: The message is a $k$ dimensional vector over $\Sigma$, denoted $\alpha$. The codeword is indexed by space of $k$-dimensional vectors. The $\beta$-th symbol in the encoding of $\alpha$ is their inner product, that is $\Sigma^{k}_{i=1} \alpha_i . \beta_i$
+\end{definition}
+
+
+
+
+\section{Feige/Langberg/Nissim technique}
+
+This paper plays an important part in structure approximation research though the results the authors get out of this paper are of a negative nature. They show that for many well known NP-complete problems, it is NP-hard to produce a solution whose Hamming distance from an optimal solution is considerably closer than getting a solution by taking only a random string \cite{FLN00}. 
+
+Here they deal with the natural witnesses of the problems. The solution for an optimal value for a NP-complete problem can be called a witness. The witness of a problem is not universal but different problems has different natural witnesses. Suppose, if we consider a SAT problem then the satisfying assignment can be called a witness for that problem. Similarly the bound on the KNAPSACK can be the witness for a KNAPSACK problem and if we consider a Clique problem it can have two witnesses. The set of the vertices by which the clique is created can be a witness and similarly the edges can be marked as 0 and 1 where the edges marked with 1 would form a clique. This can be another witness for the clique problem.
+
+They use many to one reduction in their approach. Such as, from SAT we can get the witness approximation for Clique and so on where Sheldon and Young's \cite{SY03} approach is the turing reduction. 
+
+In this paper they takes some of the problems from Karp's list of 21 NP-complete decision problems [citation] and find out their witness approximation(Hamming distance). The following table shows the result of the problems they mention in the paper. 
+
+\begin{center}
+    \begin{tabular}{ | l | l |}
+    \hline
+    Problem & Hamming distance \\ \hline
+    3SAT & $1/2-\epsilon$ \\ \hline
+    Max-Clique & $1/2-\epsilon$ \\ \hline
+    Chromatic Number & $2/3-\epsilon$ \\ \hline
+    Independent Set & $1/2-\epsilon$ \\ \hline
+    Vertex Cover & $1/2-\epsilon$ \\ \hline
+    Feedback Edge Set & $1/2-\epsilon$ (not tight)\\ \hline
+    Directed Hamiltonian Cycle & $1/2-\epsilon$\\ \hline
+    Hamiltonian Cycle & $2/5-\epsilon$(not tight)\\ 
+    \hline
+    \end{tabular}
+\end{center}
+ 
+ 
+Now we will see the witness inapproximability of SAT which was showed in this paper. They show that given a satisfyable Boolean formula $\Phi$, it is NP-hard to find an assignment $x$ to the variables of $\Phi$ which is of Hamming distance significantly less then 1/2 to some satisfying assignment of $\Phi$. 
+
+\begin{claim}
+Approximating satisfying assignment for 3SAT(and 3CSP) formula within Hamming distance $1/2-\epsilon$ is NP-hard.
+\end{claim}
+
+\begin{proof}
+Let $R$= {($w,\phi_0)|\exists a$ s.t $w$=$C(a)$ and $\phi_0(a)$ is true$}$ where $\phi_0$ is a SAT formula and the size of the witness $w$ is $n$. They use a technique of finding out the 'core' of the problem and later 'amplify' it. The 'core' of the problem is those variables which are hard to approximate which is $\phi_1$ here. And by 'amplify' they mean the amplification of the 'core' variables to obtain the final formula.
+
+At first using any standard reduction like Cook's theorem, $R$ is transformend into a 3SAT formula. Then the variables of $\phi_1$ is denoted as ${w_1,w_2,.....,w_n; z_1,z_2,...,z_l}$, where the ${w_1,w_2,.....,w_n}$ in a satisfying assignment to $phi_1$ represent a witness $w$ to $phi_0$ in $R$ and ${z_1,z_2,.....,z_n}$ are the auxiliary variables which are added by the reduction. 
+
+Then comes the amplification step where a 3CSP formula $phi_2$ is constructed by duplicating the variables ${w_1,w_2,.....,w_n}$ so that the number of auxiliary variables ${z_1,z_2,.....,z_n}$ is small compare to the number of total variable. So, the construction of $phi_2$ looks like $\phi_2(w_1,w_2,.....,w_n;w^{1}_{1},w^{2}_{2},.....,w^{m}_{n};z_1,z_2,.....,z_n)$ and it can be defined as
+
+$\phi_2 = \phi_1(w_1,w_2,.....,w_n;z_1,z_2,.....,z_n)\wedge \bigwedge^{n}_{i=1}(w_i=w^{1}_{i})\wedge \bigwedge^{n}_{i=1} \bigwedge^{m-1}_{j=1} (w^{j}_{i}=w^{j+1}_{i})$
+
+In some point it contradicts the witness inapproximability of relation $R$ above thus proving the claim. 
+
+
+\end{proof}
+
+The rest of the problems e.g., Clique, Chromatic number etc are done based on many to one reduction. The remaining problems in the Karp's list which are not discussed here can be done by slight adjustment to the standard reductions. The authors of this paper state that those proofs will apprear in a future version of their paper though it never appeared. So, I made a contact with one of the authors, Dr. Uriel Feige and he told me that partly because of the lack of space and partly because of the technique they used in this paper to prove the witness inapproximability of some of the problem, would produce a proof for remaining of the problems. 
+
+

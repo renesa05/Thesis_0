@@ -1,0 +1,190 @@
+KNAPSACK is a very interesting NP-hard problem in the field of theoretical Computer Science. These problems have been intensively studied in the last few decades due to their simple structure and the similarity with some more complex problems. And the most amazing thing about KNAPSACK is it has tons of real life applications. Suppose there is a fire evacuation going on in a town. The inhabitants of that town will try to take those things which are valuable to them within a certain limit. This is a real life KNAPSACK example. Or one can think of a humanitarian mission going on in a place where a Helicopter is trying to bring the people food, clothes etc. But as the helicopter can carry a certain amount of weight, it will carry those items that are most important to the people within that weight limit.
+
+[picture]
+
+
+%While doing the background review for my research on Structural Approximation, I came across many interesting problems related to it. The first was suggested to me and my supervisor (Dr. Antonina Kolokolova) by Dr. Russell Impagliazzo, a renowned professor at the Institute for Advanced Study. While discussing about structural approximation with him, he suggested me the following problem(problem 1) which I found interesting and thought it could open the blocked door of my research.
+
+\subsection {Problem 1}
+
+\textbf {A natural problem with easy value-approximation (a FPTAS), but hard to structure approximate.}
+
+%For this specific problem I studied a very interesting problem known as KNAPSACK. The main criteria behind choosing KNAPSACK was it is easy to value approximate and it has a FPTAS so that it basically has those two conditions which the Problem 1 should have.
+
+
+
+
+\section{Problem Definition}
+
+
+
+
+\begin{mydef}[KNAPSACK]
+
+Given a set $S = (a_1, a_2,....a_n)$ of objects, with specified size and profits, size$(a_i)\in Z^{+}$ and profit $(a_i)\in Z^{+}$, and a "knapsack capacity" $B \in Z^{+} $, find a subset of objects whose total size is bounded by $B$ and the total profit is maximized. \cite{Vazirani:2001:AA:500776}
+
+\end{mydef}
+
+\section{NP-hardness of KNAPSACK}
+
+---------
+
+\section{Different algorithms for finding the solutions for KNAPSACK}
+
+Different algorithms have been studied in the recent past to find out the optimal/approximate solution for KNAPSACK [MT90--powerpoint]. 
+
+\begin{itemize}
+\item The Greedy Algorithm : The above definition of KNAPSACK is for 0-1 KNAPSACK. There is also another kind of variation which we call "Fractional KNAPSACK". The difference between 0-1 and fractional KNAPSACK is mainly in choosing the object to obtain maximum profit within a certain weight bound. In 0-1 KNAPSACK, an item has to be taken fully in KNAPSACK or it is left behind. But with Fractional KNAPSACK, any fraction of the item can be taken to obtain maximum profit keeping the weight bound in mind.
+
+The greedy algorithm is very efficient for finding the solution for Fractional KNAPSACK. The algorithm is discussed below in brief:
+\begin{itemize}
+
+
+\item Compute the profit per weight $\frac {p_i}{w_i}$ for each item.
+
+\item Obeying a greedy strategy, take as much as possible of the item with the greatest profit per weight .
+
+\item If the supply of that item is exhausted and there is still more room, take as much as possible of the item with the next profit per weight , and so forth until there is no more room.
+
+\end{itemize}
+
+\item Branch and Bound Algorithms
+\item Dynamic Programming Algorithms : Discussed in the next section
+\item Reduction Algorithms
+\item Approximate Algorithms: Discussed in the next section
+\item Exact Algorithms for large size problems
+\end{itemize}
+\section{Example}
+
+
+We will see a real life example of KNAPSACK problem here and we would like to find out the solution of that problem using dynamic programming.
+
+Let us consider a scenario where a Burgler is trying to steal something from a Jewellery shop. The Burgler has a KNAPSACK and that can carry a certain weight, $B$=12. 
+
+The jewellery shop has some expensive items for the burgler to choose from. Each item is associated with a certain weight and profit. 
+
+\begin{tabular}{c c c}
+ & \multicolumn{2}{c}{\bfseries Weight and profit breakdown for each item}\\
+ & \multicolumn{1}{c}{Weight} & \multicolumn{1}{c}{Profit}\\
+\bfseries Item A & 5 & 2\\
+\bfseries Item B & 2 & 3\\
+\bfseries Item C & 3 & 4\\
+\bfseries Item D & 6 & 5
+\end{tabular}
+
+The dynamic programming algorithm is as follows:
+\begin{itemize}
+\item Let $P$ = Profit of most valuable item; in this example it is 5 for Item D.
+\item Let $nP$ = upper bound on the profit that can be achieved by any solution.
+\item For each $i\in {1,....,n}$ and $p\in {1,....,$nP$}$, let $S_{i,p}$ denote a subset of ${a_{1},...,a_{i}}$ whose total profit is exactly $p$ and whose total size is minimized.
+\item Let $A(1,p)$ denote the size of the set $S_{i,p}$ ($A(i,p)=\infty$ if no such set exists).
+\item $A(i+1,p)=
+\left\{\begin{array}{cl}
+	min\{A(i,p),size(a_i+1)+A(i,p-profit(a_i+1))\} ,& if profit (a_i+1)\geq p \\
+	A(i+1,p)=A(i,p)	,& otherwise
+		\end{array}\right  $
+\end{itemize}	
+Using this algorithm we will now produce the solution table for this KNAPSACK problem.
+
+
+\begin{landscape}
+\begin{table}[ht]
+\caption{Solution Table} % title of Table
+\centering % used for centering table
+
+\begin{tabular}{c c c c c c c c c c c c c c c c c c c c c c c} % centered columns (4 columns)
+\hline %inserts double horizontal lines
+Item\# & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 & 19 & 20\\  % inserts table
+%heading
+\hline % inserts single horizontal line
+1 & $\infty$ & 5 & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ \\ 
+\hline
+2 & $\infty$ & 5 & 2 & $\infty$ & 7 & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$  \\
+\hline
+3 & $\infty$  & 5 & 2 & 3 & 7 & 8 & 5 & $\infty$ & 10 & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ \\
+\hline
+4 & $\infty$  & 5 & 2 & 3 & 6 & 8 & 5 & 8 & 9 & 13 & 14 & 11 & $\infty$ & 16 & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ \\
+\hline %inserts single line
+\end{tabular}
+\end{table}
+\end{landscape}
+
+As the burgler could carry items less or equal to 12, the solution table shows that the burgler can take the items weighing upto 11 which will be most profitable for him. From the solution table and the Weight/profit table it can easily be seen that those items are Item B, C and D. 
+
+(Note: this section is mainly from Approximation algorithm--V. Vazirani)
+It can easily be seen that if the profits of objects were small number, the a regular polynomial algorithm can be used to solve this problem. But what if the profits are huge for objects which to be considered. In that case the running time of the algorithm will be exponentially big and sometimes it may run for years depending on the input and the number of objects of the problem. 
+
+In this situation FPTAS can be used to find out the approximate solution for the problem. 
+\begin{itemize}
+\item $A$ is a FPTAS (Fully Polynomial Time Approximation Scheme) is for each fixed $\epsilon > 0$ , the running time of $A$ is bounded by a polynomial in the size of $I$ and  $1/\epsilon$.[V01] 
+\end{itemize}
+So, using this FPTAS we will make the profits of the objects smaller than the original so that the modified profits can be viewed as numbers bounded by a polynomial in $n$ and $1/\epsilon$. This will also ensure the profit is atleast within (1-$\epsilon$) of the optimum solution. The FPTAS algorithm for KNAPSACK is given below:
+
+\begin{itemize}
+\item Given $\epsilon > 0$ , let $K =  \dfrac{\epsilon P} {n}$
+\item For each object $a_{i}$, define $profit^{'} (a_i) = \left\lfloor \dfrac {profit (a_i)} {K}\right\rfloor$
+\item Using these as profits of objects, apply dynamic programming algorithm to find the most profitable set, S'.
+\item Output S'
+\end{itemize}
+
+Suppose 4 items are given each with a profit and weight associated with those. Say the bound for the KNAPSACK, $B$=12 here. And we want to find out the solution within 0.5 of the optimum solution. So, $\epsilon$=0.5 here.
+
+
+\begin{tabular}{c c c}
+ & \multicolumn{2}{c}{\bfseries Weight and profit breakdown for each item}\\
+ & \multicolumn{1}{c}{Weight} & \multicolumn{1}{c}{Profit}\\
+\bfseries Item A & 3 & 500\\
+\bfseries Item B & 6 & 800\\
+\bfseries Item C & 4 & 450\\
+\bfseries Item D & 2 & 1000
+\end{tabular}
+
+
+Here, 
+
+$P$=1000
+$K=\frac{0.5\times1000}{4}$ = 125
+
+
+With this $K$ we will modify the actual profit.
+
+\begin{tabular}{c c c}
+ & \multicolumn{2}{c}{\bfseries Weight and Modified profit}\\
+ & \multicolumn{1}{c}{Weight} & \multicolumn{1}{c}{Profit}\\
+\bfseries Item A & 3 & 4\\
+\bfseries Item B & 6 & 6\\
+\bfseries Item C & 4 & 3\\
+\bfseries Item D & 2 & 8
+\end{tabular}
+
+Now using the above breakdown for each item, using the dynamic programming will give us the approximate solution for this KNAPSACK problem.
+
+\begin{landscape}
+\begin{table}[ht]
+
+\caption{Solution Table for the newly obtained profits} % title of Table
+\centering % used for centering table
+
+\begin{tabular}{c c c c c c c c c c c c c c c c c c c c c c c c c c} % centered columns (4 columns)
+\hline %inserts double horizontal lines
+Item\# & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 & 19 & 20 &21 &.. &32\\  % inserts table
+%heading
+\hline % inserts single horizontal line
+1 & $\infty$ & $\infty$ & $\infty$ & 3 & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ \\ 
+\hline
+2 & $\infty$ & $\infty$ & $\infty$ & 3 & $\infty$ & 6 & $\infty$ & $\infty$ & $\infty$ & 9 & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ \\
+\hline
+3 & $\infty$  & $\infty$ & 4 & 3 & $\infty$ & 6 & 7 & $\infty$ & 10 & 9 & $\infty$ & $\infty$ & 13 & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$\\
+\hline
+4 & $\infty$  & $\infty$ & 4 & 3 & $\infty$ & 6 & 7 & 2 & 10 & 9 & 6 & 5 & 13 & 8 & $\infty$ & $\infty$ & 12 & 11 & $\infty$ & $\infty$ & 15 & $\infty$ & $\infty$ \\
+\hline %inserts single line
+\end{tabular}
+\end{table}
+\end{landscape}
+
+From this solution table it can easily be seen that the maximum modified profit one can get is 18 keeping the KNAPSACK bound, $B$=12 in mind. So, the KNAPSACK can carry Item A, B and D for the profit to get maximized. 
+
+\section{Relation between s-FPTAS and structural approximation for NP-hard problems}
+
+
+In [HMvRW07] it was shown that no NP-hard problem has s-FPTAS. That means any NP-hard problem is hard to structure-approximate if structure-approximation implies having a s-FPTAS. Going back to the original problem at the start of this Chapter, it can easily be conclude that KNAPSACK is a NP-hard problem that it easy to value-approximate but hard to structure-approximate.

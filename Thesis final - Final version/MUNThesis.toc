@@ -1,0 +1,32 @@
+\select@language {english}
+\contentsline {chapter}{Abstract}{ii}
+\contentsline {chapter}{Acknowledgments}{iii}
+\contentsline {chapter}{Table of Contents}{v}
+\contentsline {chapter}{List of Figures}{vii}
+\contentsline {chapter}{\numberline {1}Introduction}{1}
+\contentsline {section}{\numberline {1.1}Motivation}{1}
+\contentsline {section}{\numberline {1.2}Chapter Organization}{3}
+\contentsline {chapter}{\numberline {2}Various approaches to approximation}{4}
+\contentsline {section}{\numberline {2.1}Computational complexity setting}{4}
+\contentsline {section}{\numberline {2.2}Heuristic vs. Approximation algorithm}{5}
+\contentsline {subsection}{\numberline {2.2.1}Value-approximation algorithm}{8}
+\contentsline {subsection}{\numberline {2.2.2}Positive approximation results for different problems}{8}
+\contentsline {section}{\numberline {2.3}Problem definitions}{9}
+\contentsline {section}{\numberline {2.4}Inapproximability Results}{10}
+\contentsline {section}{\numberline {2.5}Structure Approximation}{10}
+\contentsline {chapter}{\numberline {3}Lower Bounds/ Inapproximibility results}{12}
+\contentsline {subsection}{\numberline {3.0.1}General functions}{12}
+\contentsline {subsection}{\numberline {3.0.2}Hamming lower bounds}{12}
+\contentsline {subsection}{\numberline {3.0.3}Gal, Halevi, Lipton and Petrank: Partial and Approximate NP-witnesses}{12}
+\contentsline {subsection}{\numberline {3.0.4}Some results}{13}
+\contentsline {subsection}{\numberline {3.0.5}Kumar and Sivakumar: hard-to-approximate witnesses for all NP languages}{14}
+\contentsline {subsection}{\numberline {3.0.6}Sheldon and Young: Hamming Approximation of NP Witnesses}{17}
+\contentsline {section}{\numberline {3.1}Main tool: Error correcting codes}{18}
+\contentsline {section}{\numberline {3.2}Feige/Langberg/Nissim technique}{19}
+\contentsline {chapter}{\numberline {4}Positive results}{23}
+\contentsline {section}{\numberline {4.1}Symmetric Problems}{23}
+\contentsline {subsection}{\numberline {4.1.1}Randomized Algorithm}{23}
+\contentsline {subsection}{\numberline {4.1.2}Weighted Max-Cut example}{24}
+\contentsline {section}{\numberline {4.2}Sheldon and Young's result}{24}
+\contentsline {chapter}{\numberline {5}Conclusion and future work}{25}
+\contentsline {chapter}{Bibliography}{26}

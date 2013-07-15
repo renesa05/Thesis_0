@@ -1,0 +1,38 @@
+%%-----------Chapters start-------------------------------------
+%%-----------Chapter 4------------------------------------------
+\chapter{Positive results}
+\label{chap:4}
+
+
+
+\section {Symmetric Problems}
+
+
+\subsection{Randomized Algorithm}
+
+Randomized algorithms: make random choices during run. 
+
+Main benefits:
+
+1.speed: may be faster than any deterministic
+
+2. even if not faster, often simpler (quicksort)
+
+3. sometimes, randomized is best
+
+4. sometime, randomized idea leads to deterministic algorithm
+
+\begin{example}
+Make a string of the same length as the witness string like this it's a binary string so every bit can be either 0 or 1. At first we flip a coin to decide whether the first bit is 0 and then we flip the coin to decide whether the second bit is 0. As we are doing it we will get probability of 1/2 of guessing each bit correct. So our expectation is that we guess about 1/2 of the bits correct and this will give us structure approximation that gets us 1/2 of the bits right. 
+\end{example}
+
+\subsection{Weighted Max-Cut example}
+*
+So, here is one big question they found that sometimes we can do approximation upto ½. Weighted max cut is one example where Todd and others were able to give ½ approximation algorithm. Weighted max cut problem is when you have a graph, bunch of vertices , you have weights on edges and you want to cut across the graph so that some of the vertices are on the left some on the right such that the sum of the weight of the edges going across is maximized.  Here in the picture if you keep "a" in one side and the rest of the vertices in another then the cut will be maximum. The minimum cut can be solved by network flows but the maximum cut is NP hard. Notice the following if I want to encode this solution into binary string how do I do it? You will have a string of 0s and 1s where for example 0 corresponds to the vertices being on the right and 1 on the left.  Notice if you switch 0s with 1s you will get the same solution as both side are the same you just flipped the sides. Now taking arbitrary binary strings we could generate it by flipping a coin and if the coin comes head you put a 1 and if tail then you put a 0. Take a random binary string with a length equal to the number of vertices. This string is guaranteed to have atleast ½ of the vertices common with the left side or the right side of the optimal solution. 
+
+\section{Sheldon and Young's result}
+
+
+
+
+

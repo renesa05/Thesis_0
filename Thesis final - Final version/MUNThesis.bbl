@@ -1,0 +1,81 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{HMvRW07}
+
+\bibitem[AB09]{AB09}
+Sanjeev Arora and Boaz Barak.
+\newblock {\em Computational Complexity: A Modern Approach}.
+\newblock Cambridge University Press, New York, NY, USA, 1st edition, 2009.
+
+\bibitem[ACG{\etalchar{+}}99]{ACGKSP99}
+Giorgio Ausiello, Pierluigi Crescenzi, Giorgio Gambosi, Viggo Kann, Alberto
+  Marchetti-Spaccamela, and Marco Protasi.
+\newblock {\em Complexity and Approximation: Combinatorial Optimization:
+  Problems and Their Approximability Properties}.
+\newblock Springer, 1999.
+
+\bibitem[CLRS01]{Cormen2001}
+T.~H. Cormen, C.~E. Leiserson, R.~L. Rivest, and C.~Stein.
+\newblock {\em Introduction to Algorithms}.
+\newblock MIT Press, 2001.
+
+\bibitem[FLN00]{FLN00}
+Uriel Feige, Michael Langberg, and Kobbi Nissim.
+\newblock {On the hardness of approximating NP witnesses}.
+\newblock In {\em APPROX}, pages 120--131, 2000.
+
+\bibitem[GHLP99]{GHLP99}
+Anna Gal, Shai Halevi, Richard~J. Lipton, and Erez Petrank.
+\newblock Computing the partial solutions.
+\newblock In {\em 14th Annual IEEE Conference on Computational Complexity
+  (CCC'99)}, pages 34 -- 45, 1999.
+
+\bibitem[GR08]{GR08}
+Venkatesan Guruswami and Atri Rudra.
+\newblock {Soft Decoding, Dual BCH Codes, and Better List-Decodable
+  $\varepsilon$-Biased Codes}.
+\newblock In {\em IEEE Conference on Computational Complexity}, pages 163--174,
+  2008.
+
+\bibitem[GR11]{GR-journal}
+Venkatesan Guruswami and Atri Rudra.
+\newblock {Soft Decoding, Dual BCH Codes, and Better List-Decodable
+  $\varepsilon$-Biased Codes}.
+\newblock {\em IEEE Transactions on Information Theory}, 57(2):705--717, 2011.
+
+\bibitem[HMvRW07]{HMRW07}
+Matthew Hamilton, Moritz M{\"u}ller, Iris van Rooij, and Todd Wareham.
+\newblock Approximating solution structure.
+\newblock In Erik Demaine, Gregory~Z. Gutin, Daniel Marx, and Ulrike Stege,
+  editors, {\em Structure Theory and FPT Algorithmics for Graphs, Digraphs and
+  Hypergraphs}, number 07281 in Dagstuhl Seminar Proceedings. Internationales
+  Begegnungs- und Forschungszentrum f{\"u}r Informatik (IBFI), Schloss
+  Dagstuhl, Germany, Dagstuhl, Germany, 2007.
+
+\bibitem[Hoc97]{Hochbaum1996}
+Dorit~S. Hochbaum, editor.
+\newblock {\em Approximation algorithms for NP-hard problems}.
+\newblock PWS Publishing Co., Boston, MA, USA, 1997.
+
+\bibitem[KS99]{KS99}
+Ravi Kumar and D.~Sivakumar.
+\newblock {Proofs, Codes, and Polynomial-Time Reducibilities}.
+\newblock In {\em IEEE Conference on Computational Complexity}, pages 46--53,
+  1999.
+
+\bibitem[Sud96]{Sud96}
+Madhu Sudan.
+\newblock {Maximum likelihood decoding of Reed-Solomon codes}.
+\newblock pages 164--172, 1996.
+
+\bibitem[Sud00]{Sud00}
+Madhu Sudan.
+\newblock {List Decoding: Algorithms and Applications}.
+\newblock {\em Theoretical Computer Science: Exploring new frontiers of
+  theoretical informatics}, 1872/2000:25--41, 2000.
+
+\bibitem[SY03]{SY03}
+Daniel Sheldon and Neil Young.
+\newblock {Hamming approximation of NP witnesses}.
+\newblock (Unpublished manuscript referenced in Guruswami/Rudra 2008), 2003.
+
+\end{thebibliography}
